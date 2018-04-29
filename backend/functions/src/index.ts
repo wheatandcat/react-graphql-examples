@@ -2,31 +2,49 @@ import * as functions from "firebase-functions"
 import * as express from "express"
 import * as graphqlHTTP from "express-graphql"
 import { buildSchema } from "graphql"
+import {
+  GraphQLSchema,
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLInt,
+  GraphQLList,
+} from "graphql"
+import { scheme as hello } from "./scheme/hello"
+import { scheme as userType } from "./scheme/user"
 
-// Init express
+const schema = new GraphQLSchema({
+  query: new GraphQLObjectType({
+    name: "Query",
+    fields: {
+      hello,
+      user: {
+        type: userType,
+        args: { id: { type: GraphQLInt } },
+        resolve: (_, args) => {
+          console.log(args)
+
+          return { id: 1, name: "foo" }
+        },
+      },
+      users: {
+        type: new GraphQLList(userType),
+        args: { id: { type: GraphQLInt } },
+        resolve: (_, args) => {
+          console.log(args)
+
+          return [{ id: 1, name: "foo" }, { id: 2, name: "bar" }]
+        },
+      },
+    },
+  }),
+})
+
 const app = express()
-
-// Construct a schema, using GraphQL schema language
-const schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`)
-
-// The root provides a resolver function for each API endpoint
-var root = {
-  hello: () => {
-    return "Hello world!"
-  },
-}
-
 app.use(
-  "/",
+  "/graphql",
   graphqlHTTP({
     schema: schema,
-    rootValue: root,
-    graphiql: true,
   })
 )
 
-exports.graphql = functions.https.onRequest(app)
+exports.app = functions.https.onRequest(app)

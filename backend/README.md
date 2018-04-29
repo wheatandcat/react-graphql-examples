@@ -18,3 +18,9 @@ gcloud beta emulators datastore start
 ```
 firebase serve --only functions
 ```
+
+### deploy
+
+```
+firebase deploy --only functions
+```
