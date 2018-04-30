@@ -1,11 +1,24 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const functions = require("firebase-functions");
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
 const graphql_1 = require("graphql");
+const Datastore = require("@google-cloud/datastore");
 const hello_1 = require("./scheme/hello");
 const user_1 = require("./scheme/user");
+const user_2 = require("./utils/user");
+const datastore = new Datastore({
+    projectId: process.env.PROJECT_ID || "test",
+});
 const schema = new graphql_1.GraphQLSchema({
     query: new graphql_1.GraphQLObjectType({
         name: "Query",
@@ -13,18 +26,15 @@ const schema = new graphql_1.GraphQLSchema({
             hello: hello_1.scheme,
             user: {
                 type: user_1.scheme,
-                args: { id: { type: graphql_1.GraphQLInt } },
-                resolve: (_, args) => {
-                    console.log(args);
-                    return { id: 1, name: "foo" };
-                },
+                args: { key: { type: graphql_1.GraphQLInt } },
+                resolve: (_, args) => __awaiter(this, void 0, void 0, function* () {
+                    return yield user_2.user(datastore, args.key);
+                }),
             },
             users: {
                 type: new graphql_1.GraphQLList(user_1.scheme),
-                args: { id: { type: graphql_1.GraphQLInt } },
                 resolve: (_, args) => {
-                    console.log(args);
-                    return [{ id: 1, name: "foo" }, { id: 2, name: "bar" }];
+                    return user_2.users(datastore);
                 },
             },
         },

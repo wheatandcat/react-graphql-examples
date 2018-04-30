@@ -5,12 +5,17 @@ import { buildSchema } from "graphql"
 import {
   GraphQLSchema,
   GraphQLObjectType,
-  GraphQLString,
   GraphQLInt,
   GraphQLList,
 } from "graphql"
+import * as Datastore from "@google-cloud/datastore"
 import { scheme as hello } from "./scheme/hello"
 import { scheme as userType } from "./scheme/user"
+import { user, users } from "./utils/user"
+
+const datastore = new Datastore({
+  projectId: process.env.PROJECT_ID || "test",
+})
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
@@ -19,20 +24,15 @@ const schema = new GraphQLSchema({
       hello,
       user: {
         type: userType,
-        args: { id: { type: GraphQLInt } },
-        resolve: (_, args) => {
-          console.log(args)
-
-          return { id: 1, name: "foo" }
+        args: { key: { type: GraphQLInt } },
+        resolve: async (_, args) => {
+          return await user(datastore, args.key)
         },
       },
       users: {
         type: new GraphQLList(userType),
-        args: { id: { type: GraphQLInt } },
         resolve: (_, args) => {
-          console.log(args)
-
-          return [{ id: 1, name: "foo" }, { id: 2, name: "bar" }]
+          return users(datastore)
         },
       },
     },

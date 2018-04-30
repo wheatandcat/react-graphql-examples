@@ -1,0 +1,19 @@
+{
+  "name": "mock",
+  "scripts": {
+    "mock": "babel-node datastore.js"
+  },
+  "engines": {
+    "node": "6"
+  },
+  "dependencies": {
+    "@google-cloud/datastore": "^1.4.0",
+    "babel-polyfill": "^6.26.0"
+  },
+  "private": true,
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1"
+  }
+}
