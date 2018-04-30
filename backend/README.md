@@ -3,6 +3,7 @@
 ### setup
 
 ```
+npm install -g firebase-tools
 gcloud components install cloud-datastore-emulator
 ```
 

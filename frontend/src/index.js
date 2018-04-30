@@ -7,8 +7,13 @@ import { InMemoryCache } from "apollo-cache-inmemory"
 import { ApolloProvider } from "react-apollo"
 import Routers from "containers/Routers"
 
+const host =
+  process.env.NODE_ENV === "production"
+    ? "https://us-central1-example-202505.cloudfunctions.net"
+    : "http://localhost:5000/example-202505/us-central1"
+
 const httpLink = createHttpLink({
-  uri: `http://localhost:5000/example-202505/us-central1/app/graphql`,
+  uri: `${host}/app/graphql`,
 })
 
 const authLink = setContext((_, { headers }) => {

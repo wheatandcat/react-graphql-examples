@@ -15,6 +15,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@google-cloud/datastore": "^1.4.0",
+    "cors": "^2.8.4",
     "express": "^4.16.3",
     "express-graphql": "^0.6.12",
     "firebase-admin": "~5.12.0",

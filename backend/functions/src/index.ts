@@ -15,7 +15,7 @@ import { scheme as userType } from "./scheme/user"
 import { user, users } from "./utils/user"
 
 const datastore = new Datastore({
-  projectId: process.env.PROJECT_ID || "test",
+  projectId: process.env.NODE_ENV === "production" ? "example-202505" : "test",
 })
 
 const schema = new GraphQLSchema({

@@ -18,7 +18,7 @@ const hello_1 = require("./scheme/hello");
 const user_1 = require("./scheme/user");
 const user_2 = require("./utils/user");
 const datastore = new Datastore({
-    projectId: process.env.PROJECT_ID || "test",
+    projectId: process.env.NODE_ENV === "production" ? "example-202505" : "test",
 });
 const schema = new graphql_1.GraphQLSchema({
     query: new graphql_1.GraphQLObjectType({

@@ -18,7 +18,7 @@ export default ({ users }) => (
     <Paper>
       <List component="nav" subheader={<ListSubheader>Users</ListSubheader>}>
         {users.map((user, index) => (
-          <Link to={`user/${user.key}`} key={index}>
+          <Link to={`/user/${user.key}`} key={index}>
             <ListItem button>
               <ListItemIcon>
                 <WifiIcon />

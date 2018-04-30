@@ -1,0 +1,14 @@
+runtime: php55
+
+handlers:
+- url: /(.*\.(js|map|json|css|jpg|png|ico|svg|eot|ttf|woff|woff2))$
+  static_files: build/\1
+  upload: build/.*\.(js|map|json|css|jpg|png|ico|svg|eot|ttf|woff|woff2)$
+  secure: always
+- url: /.*
+  static_files: build/index.html
+  upload: build/index.html
+  secure: always
+
+skip_files:
+- ^(?!.*(build)).*$
