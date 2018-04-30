@@ -11,6 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const functions = require("firebase-functions");
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
+const cors = require("cors");
 const graphql_1 = require("graphql");
 const Datastore = require("@google-cloud/datastore");
 const hello_1 = require("./scheme/hello");
@@ -41,8 +42,11 @@ const schema = new graphql_1.GraphQLSchema({
     }),
 });
 const app = express();
-app.use("/graphql", graphqlHTTP({
-    schema: schema,
+app.use("/graphql", cors(), graphqlHTTP((req, res) => {
+    return {
+        schema: schema,
+        pretty: true,
+    };
 }));
 exports.app = functions.https.onRequest(app);
 //# sourceMappingURL=index.js.map

@@ -2,6 +2,7 @@ import * as functions from "firebase-functions"
 import * as express from "express"
 import * as graphqlHTTP from "express-graphql"
 import { buildSchema } from "graphql"
+import * as cors from "cors"
 import {
   GraphQLSchema,
   GraphQLObjectType,
@@ -42,8 +43,12 @@ const schema = new GraphQLSchema({
 const app = express()
 app.use(
   "/graphql",
-  graphqlHTTP({
-    schema: schema,
+  cors(),
+  graphqlHTTP((req, res) => {
+    return {
+      schema: schema,
+      pretty: true,
+    }
   })
 )
 
