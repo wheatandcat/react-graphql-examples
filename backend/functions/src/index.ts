@@ -3,6 +3,7 @@ import * as express from "express"
 import * as graphqlHTTP from "express-graphql"
 import { buildSchema } from "graphql"
 import * as cors from "cors"
+import * as admin from "firebase-admin"
 import {
   GraphQLSchema,
   GraphQLObjectType,
@@ -17,6 +18,10 @@ import { user, users } from "./utils/user"
 const datastore = new Datastore({
   projectId: process.env.NODE_ENV === "production" ? "example-202505" : "test",
 })
+
+if (process.env.NODE_ENV === "production") {
+  admin.initializeApp(functions.config().firebase)
+}
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
@@ -44,7 +49,18 @@ const app = express()
 app.use(
   "/graphql",
   cors(),
-  graphqlHTTP((req, res) => {
+  graphqlHTTP(async (req, res) => {
+    if (process.env.NODE_ENV !== "production") {
+      return {
+        schema: schema,
+        pretty: true,
+      }
+    }
+
+    const idToken = req.headers.authorization.replace("Bearer ", "")
+
+    const decodedToken = await admin.auth().verifyIdToken(idToken)
+
     return {
       schema: schema,
       pretty: true,

@@ -12,6 +12,7 @@ const functions = require("firebase-functions");
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
 const cors = require("cors");
+const admin = require("firebase-admin");
 const graphql_1 = require("graphql");
 const Datastore = require("@google-cloud/datastore");
 const hello_1 = require("./scheme/hello");
@@ -20,6 +21,9 @@ const user_2 = require("./utils/user");
 const datastore = new Datastore({
     projectId: process.env.NODE_ENV === "production" ? "example-202505" : "test",
 });
+if (process.env.NODE_ENV === "production") {
+    admin.initializeApp(functions.config().firebase);
+}
 const schema = new graphql_1.GraphQLSchema({
     query: new graphql_1.GraphQLObjectType({
         name: "Query",
@@ -42,11 +46,19 @@ const schema = new graphql_1.GraphQLSchema({
     }),
 });
 const app = express();
-app.use("/graphql", cors(), graphqlHTTP((req, res) => {
+app.use("/graphql", cors(), graphqlHTTP((req, res) => __awaiter(this, void 0, void 0, function* () {
+    if (process.env.NODE_ENV !== "production") {
+        return {
+            schema: schema,
+            pretty: true,
+        };
+    }
+    const idToken = req.headers.authorization.replace("Bearer ", "");
+    const decodedToken = yield admin.auth().verifyIdToken(idToken);
     return {
         schema: schema,
         pretty: true,
     };
-}));
+})));
 exports.app = functions.https.onRequest(app);
 //# sourceMappingURL=index.js.map
