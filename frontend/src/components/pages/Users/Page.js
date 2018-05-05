@@ -58,7 +58,7 @@ export default ({ users, onNext, onPrev }) => (
           </Button>
         )}
 
-        {"　"}
+        {"  "}
 
         {users.pageInfo.hasNextPage ? (
           <Tooltip id="next-icon" title="next">
