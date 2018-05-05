@@ -1,26 +1,27 @@
-import * as functions from "firebase-functions"
-import * as express from "express"
-import * as graphqlHTTP from "express-graphql"
-import { buildSchema } from "graphql"
-import * as cors from "cors"
-import * as admin from "firebase-admin"
+import * as functions from "firebase-functions";
+import * as express from "express";
+import * as graphqlHTTP from "express-graphql";
+import { buildSchema } from "graphql";
+import * as cors from "cors";
+import * as admin from "firebase-admin";
 import {
   GraphQLSchema,
   GraphQLObjectType,
   GraphQLInt,
-  GraphQLList,
-} from "graphql"
-import * as Datastore from "@google-cloud/datastore"
-import { scheme as hello } from "./scheme/hello"
-import { scheme as userType } from "./scheme/user"
-import { user, users } from "./utils/user"
+  GraphQLString,
+  GraphQLList
+} from "graphql";
+import * as Datastore from "@google-cloud/datastore";
+import { scheme as hello } from "./scheme/hello";
+import { scheme as userType, schemes as usersType } from "./scheme/user";
+import { user, users } from "./utils/user";
 
 const datastore = new Datastore({
-  projectId: process.env.NODE_ENV === "production" ? "example-202505" : "test",
-})
+  projectId: process.env.NODE_ENV === "production" ? "example-202505" : "test"
+});
 
 if (process.env.NODE_ENV === "production") {
-  admin.initializeApp(functions.config().firebase)
+  admin.initializeApp(functions.config().firebase);
 }
 
 const schema = new GraphQLSchema({
@@ -32,20 +33,22 @@ const schema = new GraphQLSchema({
         type: userType,
         args: { key: { type: GraphQLInt } },
         resolve: async (_, args) => {
-          return await user(datastore, args.key)
-        },
+          return await user(datastore, args.key);
+        }
       },
       users: {
-        type: new GraphQLList(userType),
+        type: usersType,
+        args: { startCursor: { type: GraphQLString } },
         resolve: (_, args) => {
-          return users(datastore)
-        },
-      },
-    },
-  }),
-})
+          console.log(args);
+          return users(datastore, args.startCursor);
+        }
+      }
+    }
+  })
+});
 
-const app = express()
+const app = express();
 app.use(
   "/graphql",
   cors(),
@@ -53,19 +56,19 @@ app.use(
     if (process.env.NODE_ENV !== "production") {
       return {
         schema: schema,
-        pretty: true,
-      }
+        pretty: true
+      };
     }
 
-    const idToken = req.headers.authorization.replace("Bearer ", "")
+    const idToken = req.headers.authorization.replace("Bearer ", "");
 
-    const decodedToken = await admin.auth().verifyIdToken(idToken)
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
 
     return {
       schema: schema,
-      pretty: true,
-    }
+      pretty: true
+    };
   })
-)
+);
 
-exports.app = functions.https.onRequest(app)
+exports.app = functions.https.onRequest(app);

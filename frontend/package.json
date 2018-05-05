@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
+  "author": "wheatandcat",
+  "license": "MIT",
   "scripts": {
     "relay": "relay-compiler --src ./src --schema ./data/schema.graphql",
     "start": "BABEL_ENV=development NODE_ENV=development webpack-dev-server --mode development",

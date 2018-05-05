@@ -1,18 +1,37 @@
-import React from "react"
-import gql from "graphql-tag"
-import connect from "lib/connect"
-import Page from "./Page"
+import React from "react";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import Page from "./Page";
 
-const MuiFeedWithData = ({ users }) => <Page users={users || []} />
+const Plain = ({ users }) => {
+  console.log(users);
+  if (!users) {
+    return null;
+  }
 
-export default connect(
-  gql`
-    query Users {
-      users {
+  return <Page users={users.items || []} />;
+};
+
+const Users = gql`
+  query Users($startCursor: String) {
+    users(startCursor: $startCursor) {
+      items {
         key
         name
       }
+      pageInfo {
+        hasPreviousPage
+        hasNextPage
+        startCursor
+        endCursor
+      }
     }
-  `,
-  MuiFeedWithData
-)
+  }
+`;
+
+const PlainWithData = graphql(Users, {
+  options: ({ match }) => ({ variables: { startCursor: "" } }),
+  props: ({ data }) => ({ ...data })
+})(Plain);
+
+export default PlainWithData;
