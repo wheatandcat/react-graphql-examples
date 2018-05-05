@@ -1,15 +1,15 @@
-import React from "react"
-import { BrowserRouter, Switch, Route } from "react-router-dom"
-import Users from "components/pages/Users/Connected"
-import User from "components/pages/User/Connected"
-import SignIn from "components/pages/SignIn/Connected"
-import SignOut from "components/pages/SignOut/Connected"
-import Auth from "./Auth"
-import App from "./App"
-import Provider from "./Provider"
-import Header from "components/molecules/Header/Bar"
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Users from "components/pages/Users/Connected";
+import User from "components/pages/User/Connected";
+import SignIn from "components/pages/SignIn/Connected";
+import SignOut from "components/pages/SignOut/Connected";
+import Auth from "./Auth";
+import App from "./App";
+import Provider from "./Provider";
+import Header from "components/molecules/Header/Bar";
 
-const auth = new Auth()
+const auth = new Auth();
 
 export default () => (
   <div>
@@ -23,6 +23,7 @@ export default () => (
               <Switch>
                 <Route path="/user/:key" component={User} />
                 <Route path="/signout" component={SignOut} />
+                <Route path="/users/:startCursor" component={Users} />
                 <Route component={Users} />
               </Switch>
             </div>
@@ -31,4 +32,4 @@ export default () => (
       </Provider>
     </BrowserRouter>
   </div>
-)
+);

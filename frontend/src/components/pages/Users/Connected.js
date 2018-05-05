@@ -1,15 +1,14 @@
-import React from "react";
+import React, { Component } from "react";
 import { graphql } from "react-apollo";
 import gql from "graphql-tag";
 import Page from "./Page";
 
-const Plain = ({ users }) => {
-  console.log(users);
-  if (!users) {
+const Plain = props => {
+  if (!props.users) {
     return null;
   }
 
-  return <Page users={users.items || []} />;
+  return <Page {...props} />;
 };
 
 const Users = gql`
@@ -30,8 +29,42 @@ const Users = gql`
 `;
 
 const PlainWithData = graphql(Users, {
-  options: ({ match }) => ({ variables: { startCursor: "" } }),
+  options: ({ startCursor }) => ({
+    variables: { startCursor: startCursor }
+  }),
   props: ({ data }) => ({ ...data })
 })(Plain);
 
-export default PlainWithData;
+export default class extends Component {
+  state = {
+    startCursor: ""
+  };
+
+  componentDidMount() {
+    this.setState({
+      startCursor: this.props.match.params.startCursor || ""
+    });
+  }
+
+  onNext = cursor => {
+    this.setState({
+      startCursor: cursor
+    });
+  };
+  onPrev = cursor => {
+    this.setState({
+      startCursor: cursor
+    });
+  };
+
+  render() {
+    return (
+      <PlainWithData
+        {...this.props}
+        startCursor={this.state.startCursor}
+        onNext={this.onNext}
+        onPrev={this.onPrev}
+      />
+    );
+  }
+}

@@ -1,11 +1,14 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import Card, { CardHeader, CardActions, CardContent } from "material-ui/Card"
-import Button from "material-ui/Button"
-import Typography from "material-ui/Typography"
-import Avatar from "material-ui/Avatar"
+import React from "react";
+import { Link } from "react-router-dom";
+import Card, { CardHeader, CardActions, CardContent } from "material-ui/Card";
+import Button from "material-ui/Button";
+import Typography from "material-ui/Typography";
+import Avatar from "material-ui/Avatar";
+import createHistory from "history/createBrowserHistory";
 
-export default ({ user }) => (
+const history = createHistory();
+
+export default ({ user, match }) => (
   <div>
     <Card>
       <CardHeader
@@ -17,10 +20,16 @@ export default ({ user }) => (
         <Typography>User Detail...</Typography>
       </CardContent>
       <CardActions>
-        <Link to={`/users`}>
-          <Button size="small">back</Button>
-        </Link>
+        {history.location.pathname === match.url ? (
+          <Link to={`/users`}>
+            <Button size="small">back</Button>
+          </Link>
+        ) : (
+          <Button size="small" onClick={history.goBack}>
+            back
+          </Button>
+        )}
       </CardActions>
     </Card>
   </div>
-)
+);

@@ -36,7 +36,5 @@ export const users = async (datastore, startCursor = "") => {
     pageInfo
   };
 
-  console.log(r);
-
   return r;
 };

@@ -18,7 +18,7 @@ export const search = async (datastore, kind, startCursor, endCursor) => {
     hasPreviousPage: p[0].length > 0,
     hasNextPage: n[0].length > 0,
     startCursor: p[1].endCursor,
-    endCursor: n[0].length > 0 ? n[1].endCursor : ""
+    endCursor: n[0].length > 0 ? endCursor : ""
   };
 };
 

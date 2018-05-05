@@ -1,15 +1,15 @@
-import React from "react"
-import { graphql } from "react-apollo"
-import gql from "graphql-tag"
-import Page from "./Page"
+import React from "react";
+import { graphql } from "react-apollo";
+import gql from "graphql-tag";
+import Page from "./Page";
 
-const Plain = ({ user }) => {
-  if (!user) {
-    return null
+const Plain = props => {
+  if (!props.user) {
+    return null;
   }
 
-  return <Page user={user} />
-}
+  return <Page {...props} />;
+};
 
 const User = gql`
   query User($key: Int) {
@@ -18,11 +18,11 @@ const User = gql`
       name
     }
   }
-`
+`;
 
 const PlainWithData = graphql(User, {
   options: ({ match }) => ({ variables: { key: match.params.key } }),
-  props: ({ data }) => ({ ...data }),
-})(Plain)
+  props: ({ data }) => ({ ...data })
+})(Plain);
 
-export default PlainWithData
+export default PlainWithData;
