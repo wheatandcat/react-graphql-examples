@@ -1,0 +1,11 @@
+runtime: php55
+service: auth
+
+handlers:
+- url: /.*
+  static_files: index.html
+  upload: index.html
+  secure: always
+
+skip_files:
+- ^(?!.*(index.html)).*$
