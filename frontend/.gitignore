@@ -24,3 +24,4 @@ yarn-error.log*
 
 build/bundle.js
 build/bundle.js.map
+src/config.js
