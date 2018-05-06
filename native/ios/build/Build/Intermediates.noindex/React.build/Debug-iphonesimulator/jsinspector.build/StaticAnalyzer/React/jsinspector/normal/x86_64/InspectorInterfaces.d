@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/iinoyouhei/go/src/gitlab.pptdev.net/tt/tampatsu/native/node_modules/react-native/ReactCommon/jsinspector/InspectorInterfaces.cpp \
-  /Users/iinoyouhei/go/src/gitlab.pptdev.net/tt/tampatsu/native/node_modules/react-native/ReactCommon/jsinspector/InspectorInterfaces.h
+  /Users/iinoyouhei/work/git/react-graphql-examples/native/node_modules/react-native/ReactCommon/jsinspector/InspectorInterfaces.cpp \
+  /Users/iinoyouhei/work/git/react-graphql-examples/native/node_modules/react-native/ReactCommon/jsinspector/InspectorInterfaces.h
