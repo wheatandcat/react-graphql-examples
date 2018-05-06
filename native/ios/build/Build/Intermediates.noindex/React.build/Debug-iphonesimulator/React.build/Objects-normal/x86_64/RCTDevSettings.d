@@ -1,0 +1,23 @@
+dependencies: \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Modules/RCTDevSettings.mm \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Modules/RCTDevSettings.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JavaScriptCore.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JSCWrapper.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Base/RCTBridge+Private.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Modules/RCTJSCSamplingProfiler.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/DevSupport/RCTPackagerClient.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Profiler/RCTProfile.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/DevSupport/RCTPackagerConnection.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/DevSupport/RCTInspectorDevServerHelper.h \
+  /Users/iinoyouhei/work/git/react-native-navigation/example/node_modules/react-native/React/Inspector/RCTInspectorPackagerConnection.h
