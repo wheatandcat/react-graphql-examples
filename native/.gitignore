@@ -56,3 +56,4 @@ buck-out/
 *.jsbundle
 
 src/config.js
+ios/GoogleService-Info.plist
