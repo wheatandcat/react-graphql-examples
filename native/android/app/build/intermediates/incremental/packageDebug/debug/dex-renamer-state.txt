@@ -1,4 +1,0 @@
-#Wed May 02 15:09:30 JST 2018
-base.0=/Users/iinoyouhei/work/git/react-native-navigation/example/android/app/build/intermediates/transforms/dexMerger/debug/0
-path.0=classes.dex
-renamed.0=classes.dex

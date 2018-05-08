@@ -1,40 +1,32 @@
 {
-  "name": "example",
+  "name": "native",
   "version": "0.0.1",
-  "author": "wheatandcat",
-  "license": "MIT",
+  "private": true,
   "scripts": {
-    "postinstall": "node ./scripts/postinstall.js",
-    "start": "watchman watch-del-all && (adb reverse tcp:8081 tcp:8081 || true) && node node_modules/react-native/local-cli/cli.js start --reset-cache",
-    "xcode": "open ios/example.xcodeproj",
-    "android": "cd android && ./gradlew installDebug",
-    "e2e": "detox test --configuration ios.sim.debug",
-    "e2e-release": "detox test --configuration ios.sim.release"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "xcode": "open ios/native.xcodeproj",
+    "android": "cd android && ./gradlew installDebug"
   },
   "dependencies": {
     "react": "^16.3.2",
     "react-native": "^0.55.3",
     "react-native-animatable": "^1.1.0",
+    "react-native-easy-grid": "^0.1.17",
+    "react-native-elements": "^1.0.0-beta5",
     "react-native-navigation": "latest",
-    "react-native-ui-lib": "^3.3.72"
+    "react-native-snap-carousel": "^3.7.0",
+    "react-native-ui-lib": "^3.3.73",
+    "react-native-vector-icons": "^4.6.0",
+    "styled-components": "^3.2.6"
   },
   "devDependencies": {
-    "detox": "^5.0.0",
-    "mocha": "^3.4.2"
+    "babel-jest": "22.4.3",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "22.4.3",
+    "react-test-renderer": "16.3.1"
   },
-  "detox": {
-    "specs": "test/e2e",
-    "configurations": {
-      "ios.sim.debug": {
-        "binaryPath": "ios/DerivedData/example/Build/Products/Debug-iphonesimulator/example.app",
-        "type": "ios.simulator",
-        "name": "iPhone 6s"
-      },
-      "ios.sim.release": {
-        "binaryPath": "ios/DerivedData/example/Build/Products/Release-iphonesimulator/example.app",
-        "type": "ios.simulator",
-        "name": "iPhone 6s"
-      }
-    }
+  "jest": {
+    "preset": "react-native"
   }
 }

@@ -1,35 +1,11 @@
 import { Navigation, ScreenVisibilityListener } from "react-native-navigation";
-import MyPage from "../components/pages/MyPage/Page";
-import SignIn from "../components/pages/SignIn/Connected";
-import React, { Component } from "react";
-import { View, Text } from "react-native";
 
-const wrapWithContext = Comp => {
-  return props => {
-    return (
-      <View>
-        <Text>test</Text>
-        <Comp
-          {...props}
-          someOtherProp="this will be available in the screen root component"
-        />
-      </View>
-    );
-  };
-};
+import MyPage from "../components/pages/MyPage/Page.js";
 
-const registrations = {
-  "example.MyPage": MyPage,
-  "example.SignIn": SignIn
-};
-
-export const registerScreens = async () => {
-  await Object.keys(registrations).forEach(key => {
-    Navigation.registerComponent(key, () =>
-      wrapWithContext(registrations[key])
-    );
-  });
-};
+export function registerScreens() {
+  Navigation.registerComponent("tampatsu.MyPage", () => MyPage);
+  Navigation.registerComponent("tampatsu.Setting", () => MyPage);
+}
 
 export function registerScreenVisibilityListener() {
   new ScreenVisibilityListener({

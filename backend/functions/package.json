@@ -1,5 +1,6 @@
 {
   "name": "functions",
+  "description": "functions",
   "scripts": {
     "lint": "tslint --project tsconfig.json",
     "build": "tsc",
@@ -9,6 +10,14 @@
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wheatandcat/react-relay-examples.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wheatandcat/react-relay-examples/issues"
+  },
+  "homepage": "https://github.com/wheatandcat/react-relay-examples#readme",
   "engines": {
     "node": "6"
   },
