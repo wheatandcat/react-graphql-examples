@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "xcode": "open ios/nativeGraphql.xcodeproj",
+    "xcode": "open ios/native.xcodeproj",
     "android": "cd android && ./gradlew installDebug"
   },
   "dependencies": {

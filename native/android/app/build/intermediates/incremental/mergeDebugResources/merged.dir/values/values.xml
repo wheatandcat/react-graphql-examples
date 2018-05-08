@@ -711,7 +711,6 @@
     <string name="catalyst_settings" project="catalyst" translatable="false">Dev Settings</string>
     <string name="catalyst_settings_title" project="catalyst" translatable="false">Catalyst Dev Settings</string>
     <string name="character_counter_pattern" translatable="false">%1$d / %2$d</string>
-    <string name="com.crashlytics.android.build_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">3fd32319-4ce2-4a5c-895b-a4bbbfd49cf4</string>
     <string name="drawer_close">Drawer Close</string>
     <string name="drawer_open">Drawer Open</string>
     <string name="password_toggle_content_description">Toggle password visibility</string>
