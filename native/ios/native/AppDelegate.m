@@ -6,6 +6,8 @@
  */
 
 #import "AppDelegate.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 #import <React/RCTBundleURLProvider.h>
 
@@ -28,6 +30,8 @@
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   self.window.backgroundColor = [UIColor whiteColor];
   [[RCCManager sharedInstance] initBridgeWithBundleURL:jsCodeLocation launchOptions:launchOptions];
+  
+  [Fabric with:@[[Crashlytics class]]];
 
   return YES;
 }
