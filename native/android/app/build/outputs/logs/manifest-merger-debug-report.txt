@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:1:1-26:12
+ADDED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:1:1-29:12
 	package
 		ADDED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:2:5-32
 		INJECTED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml
@@ -23,7 +23,7 @@ MERGED from [com.facebook.react:react-native:0.55.3] /Users/iinoyouhei/work/git/
 	android:name
 		ADDED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:5:22-75
 application
-ADDED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:7:5-24:19
+ADDED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:7:5-27:19
 MERGED from [native:react-native-navigation:unspecified] /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/build/intermediates/exploded-aar/native/react-native-navigation/unspecified/AndroidManifest.xml:11:5-18:19
 MERGED from [com.facebook.react:react-native:0.55.3] /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.3/AndroidManifest.xml:13:5-20
 MERGED from [com.facebook.soloader:soloader:0.1.0] /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/AndroidManifest.xml:3:3-17
@@ -79,6 +79,12 @@ MERGED from [native:react-native-navigation:unspecified] /Users/iinoyouhei/work/
 		ADDED from [native:react-native-navigation:unspecified] /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/build/intermediates/exploded-aar/native/react-native-navigation/unspecified/AndroidManifest.xml:17:13-37
 	android:name
 		ADDED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:23:17-81
+meta-data#io.fabric.ApiKey
+ADDED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:24:9-26:72
+	android:value
+		ADDED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:26:13-69
+	android:name
+		ADDED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:25:13-44
 uses-sdk
 INJECTED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [native:react-native-vector-icons:unspecified] /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/build/intermediates/exploded-aar/native/react-native-vector-icons/unspecified/AndroidManifest.xml:7:5-9:41
@@ -122,11 +128,11 @@ ADDED from [native:react-native-navigation:unspecified] /Users/iinoyouhei/work/g
 	android:name
 		ADDED from [native:react-native-navigation:unspecified] /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/build/intermediates/exploded-aar/native/react-native-navigation/unspecified/AndroidManifest.xml:13:13-84
 android:uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-IMPLIED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:1:1-26:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+IMPLIED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:1:1-29:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 android:uses-permission#android.permission.READ_PHONE_STATE
-IMPLIED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:1:1-26:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
+IMPLIED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:1:1-29:12 reason: org.webkit.android_jsc has a targetSdkVersion < 4
 android:uses-permission#android.permission.READ_EXTERNAL_STORAGE
-IMPLIED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:1:1-26:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
+IMPLIED from /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/src/main/AndroidManifest.xml:1:1-29:12 reason: org.webkit.android_jsc requested WRITE_EXTERNAL_STORAGE
 meta-data#android.support.VERSION
 ADDED from [com.android.support:design:25.3.1] /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/build/intermediates/exploded-aar/com.android.support/design/25.3.1/AndroidManifest.xml:25:5-27:34
 MERGED from [com.android.support:recyclerview-v7:25.3.1] /Users/iinoyouhei/work/git/react-graphql-examples/native/android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.3.1/AndroidManifest.xml:22:5-24:34

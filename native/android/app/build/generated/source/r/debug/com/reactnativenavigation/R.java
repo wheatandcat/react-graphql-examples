@@ -1127,13 +1127,13 @@ public final class R {
 		public static final int catalyst_settings = 0x7f08003a;
 		public static final int catalyst_settings_title = 0x7f08003b;
 		public static final int character_counter_pattern = 0x7f08003c;
-		public static final int drawer_close = 0x7f08003d;
-		public static final int drawer_open = 0x7f08003e;
-		public static final int password_toggle_content_description = 0x7f08003f;
-		public static final int path_password_eye = 0x7f080040;
-		public static final int path_password_eye_mask_strike_through = 0x7f080041;
-		public static final int path_password_eye_mask_visible = 0x7f080042;
-		public static final int path_password_strike_through = 0x7f080043;
+		public static final int drawer_close = 0x7f08003e;
+		public static final int drawer_open = 0x7f08003f;
+		public static final int password_toggle_content_description = 0x7f080040;
+		public static final int path_password_eye = 0x7f080041;
+		public static final int path_password_eye_mask_strike_through = 0x7f080042;
+		public static final int path_password_eye_mask_visible = 0x7f080043;
+		public static final int path_password_strike_through = 0x7f080044;
 		public static final int search_menu_title = 0x7f080013;
 		public static final int status_bar_notification_info_overflow = 0x7f080014;
 	}
