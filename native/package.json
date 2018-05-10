@@ -22,6 +22,7 @@
     "react-native-animatable": "^1.1.0",
     "react-native-easy-grid": "^0.1.17",
     "react-native-elements": "^1.0.0-beta5",
+    "react-native-firebase": "^4.1.0",
     "react-native-navigation": "latest",
     "react-native-snap-carousel": "^3.7.0",
     "react-native-ui-lib": "^3.3.73",
