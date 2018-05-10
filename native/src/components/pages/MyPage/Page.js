@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import Icon from "react-native-vector-icons/FontAwesome";
-import styled from "styled-components/native";
-import { ScrollView } from "react-native";
-import { View, Text } from "react-native-ui-lib";
-import { Input } from "react-native-elements";
-import Carousel from "./Carousel/Board";
-import Card from "./Card/Board";
+import React, { Component } from "react"
+import Icon from "react-native-vector-icons/FontAwesome"
+import styled from "styled-components/native"
+import { ScrollView } from "react-native"
+import { View, Text } from "react-native-ui-lib"
+import { Input } from "react-native-elements"
+import Carousel from "./Carousel/Board"
+import Card from "./Card/Board"
 
 export default class Bananas extends Component {
   render() {
@@ -40,31 +40,31 @@ export default class Bananas extends Component {
           <Carousel />
         </Root>
       </ScrollView>
-    );
+    )
   }
 }
 
-const Root = styled.View``;
+const Root = styled.View``
 
 const InputBack = styled.View`
   background-color: #ffffff;
-`;
+`
 
 const Title = styled.View`
   padding-horizontal: 10;
   padding-vertical: 10;
-`;
+`
 
 const Big = styled.Text`
   font-size: 15;
-`;
+`
 
 const Form = styled.View`
   padding-left: 10;
   padding-vertical: 10;
-`;
+`
 
 const InputTitle = styled.View`
   padding-top: 10;
   padding-bottom: 10;
-`;
+`

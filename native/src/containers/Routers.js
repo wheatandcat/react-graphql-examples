@@ -1,10 +1,27 @@
-import { Navigation, ScreenVisibilityListener } from "react-native-navigation";
+import React, { Component } from "react"
+import { Navigation, ScreenVisibilityListener } from "react-native-navigation"
+import MyPage from "../components/pages/MyPage/Connected"
+import { ApolloProvider } from "react-apollo"
 
-import MyPage from "../components/pages/MyPage/Page.js";
+const withProvider = (Component, client) => {
+  return class extends Component {
+    render() {
+      return (
+        <ApolloProvider client={client}>
+          <Component {...this.props} />
+        </ApolloProvider>
+      )
+    }
+  }
+}
 
-export function registerScreens() {
-  Navigation.registerComponent("tampatsu.MyPage", () => MyPage);
-  Navigation.registerComponent("tampatsu.Setting", () => MyPage);
+export function registerScreens(client) {
+  Navigation.registerComponent("tampatsu.MyPage", () =>
+    withProvider(MyPage, client)
+  )
+  Navigation.registerComponent("tampatsu.Setting", () =>
+    withProvider(MyPage, client)
+  )
 }
 
 export function registerScreenVisibilityListener() {
@@ -18,6 +35,6 @@ export function registerScreenVisibilityListener() {
       ),
     willDisappear: ({ screen }) =>
       console.log(`Screen will disappear ${screen}`),
-    didDisappear: ({ screen }) => console.log(`Screen disappeared ${screen}`)
-  }).register();
+    didDisappear: ({ screen }) => console.log(`Screen disappeared ${screen}`),
+  }).register()
 }

@@ -19,7 +19,7 @@ const hello_1 = require("./scheme/hello");
 const user_1 = require("./scheme/user");
 const user_2 = require("./utils/user");
 const datastore = new Datastore({
-    projectId: process.env.NODE_ENV === "production" ? "example-202505" : "test"
+    projectId: process.env.NODE_ENV === "production" ? "example-202505" : "test",
 });
 if (process.env.NODE_ENV === "production") {
     admin.initializeApp(functions.config().firebase);
@@ -34,7 +34,7 @@ const schema = new graphql_1.GraphQLSchema({
                 args: { key: { type: graphql_1.GraphQLInt } },
                 resolve: (_, args) => __awaiter(this, void 0, void 0, function* () {
                     return yield user_2.user(datastore, args.key);
-                })
+                }),
             },
             users: {
                 type: user_1.schemes,
@@ -42,25 +42,29 @@ const schema = new graphql_1.GraphQLSchema({
                 resolve: (_, args) => {
                     console.log(args);
                     return user_2.users(datastore, args.startCursor);
-                }
-            }
-        }
-    })
+                },
+            },
+        },
+    }),
 });
 const app = express();
 app.use("/graphql", cors(), graphqlHTTP((req, res) => __awaiter(this, void 0, void 0, function* () {
-    if (process.env.NODE_ENV !== "production") {
-        return {
-            schema: schema,
-            pretty: true
-        };
-    }
-    const idToken = req.headers.authorization.replace("Bearer ", "");
-    const decodedToken = yield admin.auth().verifyIdToken(idToken);
+    //if (process.env.NODE_ENV !== "production") {
     return {
         schema: schema,
-        pretty: true
+        pretty: true,
     };
+    //}
+    /*
+    const idToken = req.headers.authorization.replace("Bearer ", "");
+
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+
+    return {
+      schema: schema,
+      pretty: true
+    };
+    */
 })));
 exports.app = functions.https.onRequest(app);
 //# sourceMappingURL=index.js.map

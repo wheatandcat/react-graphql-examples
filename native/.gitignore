@@ -54,4 +54,4 @@ buck-out/
 */fastlane/screenshots
 
 # Bundle artifact
-*.jsbundle
+gradle.properties
