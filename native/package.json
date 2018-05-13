@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "xcode": "open ios/native.xcodeproj",
+    "xcode": "open ./ios/native.xcworkspace",
     "android": "cd android && ./gradlew installDebug"
   },
   "dependencies": {
@@ -16,9 +16,9 @@
     "apollo-link-http": "^1.5.4",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
-    "react": "^16.3.2",
+    "react": "^16.3.1",
     "react-apollo": "^2.1.3",
-    "react-native": "^0.55.3",
+    "react-native": "^0.55.4",
     "react-native-animatable": "^1.1.0",
     "react-native-easy-grid": "^0.1.17",
     "react-native-elements": "^1.0.0-beta5",

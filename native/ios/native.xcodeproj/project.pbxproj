@@ -46,7 +46,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8C7E84F3495A41D7986B74BB /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3828CCE780E24AF392D7A90C /* Entypo.ttf */; };
 		95379186C3854970FA217877 /* libPods-native.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C09E44FADEA4712D4CE9D759 /* libPods-native.a */; };
-		9F47DDCF20A7FF56004CB4BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F47DDA520A7FF56004CB4BA /* GoogleService-Info.plist */; };
+		9F87A9C920A80FF3009ED349 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9F87A99F20A80FF3009ED349 /* GoogleService-Info.plist */; };
 		9FD9D86C20A1ED1800F844DC /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD9D86A20A1ED1800F844DC /* Crashlytics.framework */; };
 		9FD9D86D20A1ED1800F844DC /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD9D86B20A1ED1800F844DC /* Fabric.framework */; };
 		9FEB773D20A809FE007CC5B2 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
@@ -400,7 +400,7 @@
 		87715213769D450D8043FE88 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		90703EBE49974128A6FAA1A1 /* reactnativeuilib.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = reactnativeuilib.xcodeproj; path = "../node_modules/react-native-ui-lib/lib/ios/reactnativeuilib.xcodeproj"; sourceTree = "<group>"; };
 		9EF0457CAED74769AD77918C /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		9F47DDA520A7FF56004CB4BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9F87A99F20A80FF3009ED349 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9FD9D86A20A1ED1800F844DC /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		9FD9D86B20A1ED1800F844DC /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
@@ -562,7 +562,7 @@
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
-				9F47DDA520A7FF56004CB4BA /* GoogleService-Info.plist */,
+				9F87A99F20A80FF3009ED349 /* GoogleService-Info.plist */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -1261,6 +1261,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				9F87A9C920A80FF3009ED349 /* GoogleService-Info.plist in Resources */,
 				8C7E84F3495A41D7986B74BB /* Entypo.ttf in Resources */,
 				82752BA3D0C84C269C21AAD1 /* EvilIcons.ttf in Resources */,
 				D732C86C3DBB4931AFAB9E76 /* Feather.ttf in Resources */,
@@ -1272,7 +1273,6 @@
 				FE0E91418C0F4053890CB776 /* Octicons.ttf in Resources */,
 				7A4045677E184CCFBF81C443 /* SimpleLineIcons.ttf in Resources */,
 				1AE73F9392D84EC2BE2C8ED2 /* Zocial.ttf in Resources */,
-				9F47DDCF20A7FF56004CB4BA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
