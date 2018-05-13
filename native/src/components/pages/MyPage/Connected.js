@@ -4,6 +4,8 @@ import gql from "graphql-tag"
 import Page from "./Page"
 
 const Plain = props => {
+  console.log("----------")
+  console.log(props.users)
   if (!props.users) {
     return null
   }

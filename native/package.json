@@ -6,7 +6,6 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "xcode": "open ios/native.xcodeproj",
-    "xcodework": "open ios/native.xcworkspace",
     "android": "cd android && ./gradlew installDebug"
   },
   "dependencies": {

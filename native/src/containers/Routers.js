@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Navigation, ScreenVisibilityListener } from "react-native-navigation"
+import MyPage from "../components/pages/MyPage/Connected"
 import { ApolloProvider } from "react-apollo"
-import MyPage from "../components/pages/MyPage/Page"
 
 const withProvider = (Component, client) => {
   return class extends Component {
