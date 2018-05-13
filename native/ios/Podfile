@@ -2,5 +2,5 @@
 platform :ios, '9.0'
 
 target 'native' do
-  pod 'Firebase/Core'
+  pod 'Firebase/Core', '~> 4.13.0'
 end

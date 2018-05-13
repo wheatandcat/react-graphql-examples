@@ -42,6 +42,7 @@
 		58B00011A9E7401D889CDD3E /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F17BC7A01F0C4EBDB1657D9E /* MaterialIcons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		6E3BC5AFC1D447B69A0AA94B /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D0885FF941C34552A5215199 /* FontAwesome.ttf */; };
+		76D57E9FB0C299EB4C613C58 /* libPods-native.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91477D6305D5E9BF486CBBC5 /* libPods-native.a */; };
 		79F984848A0D490DB2759DA2 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BD1E61C2CC3349FB8136D51D /* libRNVectorIcons.a */; };
 		7A4045677E184CCFBF81C443 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11175E7A158C444DBCEFA53A /* SimpleLineIcons.ttf */; };
 		82752BA3D0C84C269C21AAD1 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EF0457CAED74769AD77918C /* EvilIcons.ttf */; };
@@ -50,7 +51,6 @@
 		9FD9D86C20A1ED1800F844DC /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD9D86A20A1ED1800F844DC /* Crashlytics.framework */; };
 		9FD9D86D20A1ED1800F844DC /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FD9D86B20A1ED1800F844DC /* Fabric.framework */; };
 		A867787919E44C8CBF3FF9F5 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5012B7A7FC14372A3CA3D69 /* Foundation.ttf */; };
-		ADA3D68D1BC7814C4A5D6425 /* libPods-native.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91477D6305D5E9BF486CBBC5 /* libPods-native.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		CFE91CE8B14544EA88E0B289 /* libreactnativeuilib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54591E1D92F045E8B8CE5E0A /* libreactnativeuilib.a */; };
 		D732C86C3DBB4931AFAB9E76 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87715213769D450D8043FE88 /* Feather.ttf */; };
@@ -447,7 +447,7 @@
 				CFE91CE8B14544EA88E0B289 /* libreactnativeuilib.a in Frameworks */,
 				79F984848A0D490DB2759DA2 /* libRNVectorIcons.a in Frameworks */,
 				2493E364E1D74E68B818B8EC /* libRNFirebase.a in Frameworks */,
-				ADA3D68D1BC7814C4A5D6425 /* libPods-native.a in Frameworks */,
+				76D57E9FB0C299EB4C613C58 /* libPods-native.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -792,6 +792,8 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				9FD9D84120A1ECAF00F844DC /* ShellScript */,
+				8DE290F0B4AA1C6560CEADF0 /* [CP] Embed Pods Frameworks */,
+				6DF9F781A8BC60A977D7D2DB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1316,6 +1318,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		6DF9F781A8BC60A977D7D2DB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-native/Pods-native-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8DE290F0B4AA1C6560CEADF0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-native/Pods-native-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		9CA5474DC6996E852FD34FF8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
