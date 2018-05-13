@@ -6,7 +6,6 @@
  */
 
 #import "AppDelegate.h"
-#import <Firebase.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
@@ -32,9 +31,7 @@
   self.window.backgroundColor = [UIColor whiteColor];
   [[RCCManager sharedInstance] initBridgeWithBundleURL:jsCodeLocation launchOptions:launchOptions];
   
-  [FIRApp configure];
   [Fabric with:@[[Crashlytics class]]];
-  
 
   return YES;
 }
