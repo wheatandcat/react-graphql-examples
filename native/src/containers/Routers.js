@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import { Navigation, ScreenVisibilityListener } from "react-native-navigation"
-import MyPage from "../components/pages/MyPage/Connected"
 import { ApolloProvider } from "react-apollo"
+import MyPage from "../components/pages/MyPage/Connected"
+import SignIn from "../components/pages/SignIn/Page"
 
 const withProvider = (Component, client) => {
   return class extends Component {
@@ -21,6 +22,9 @@ export function registerScreens(client) {
   )
   Navigation.registerComponent("tampatsu.Setting", () =>
     withProvider(MyPage, client)
+  )
+  Navigation.registerComponent("tampatsu.SignIn", () =>
+    withProvider(SignIn, client)
   )
 }
 

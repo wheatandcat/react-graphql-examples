@@ -46,13 +46,13 @@ registerScreenVisibilityListener()
 const tabs = [
   {
     label: "xxxxx",
-    screen: "tampatsu.MyPage",
+    screen: "tampatsu.SignIn",
     icon: require("../img/list.png"),
     title: "xxxxx",
   },
   {
     label: "xxxxx",
-    screen: "tampatsu.Setting",
+    screen: "tampatsu.MyPage",
     icon: require("../img/swap.png"),
     title: "xxxxx",
   },
