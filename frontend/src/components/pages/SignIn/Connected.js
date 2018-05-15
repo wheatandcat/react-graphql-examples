@@ -1,11 +1,11 @@
-import React from "react"
+import React, { Component } from "react"
 import firebase from "firebase"
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import { Redirect, withRouter } from "react-router-dom"
 import { Consumer } from "containers/Provider"
 import Page from "./Page"
 
-class Connected extends React.Component {
+class Connected extends Component {
   state = {
     signedIn: false,
   }

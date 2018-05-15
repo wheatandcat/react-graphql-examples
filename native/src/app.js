@@ -1,4 +1,4 @@
-import { Platform } from "react-native"
+import { Platform, AsyncStorage } from "react-native"
 import { Navigation } from "react-native-navigation"
 import {
   registerScreens,
@@ -15,17 +15,15 @@ const httpLink = createHttpLink({
   uri: `${host}/app/graphql`,
 })
 
-const authLink = setContext((_, { headers }) => {
-  /*
-  const token = window.localStorage.getItem("id_token")
+const authLink = setContext(async (_, { headers }) => {
+  const token = await AsyncStorage.getItem("id_token")
 
   if (!token) {
     return {
       headers,
     }
   }
-*/
-  const token = ""
+
   return {
     headers: {
       ...headers,

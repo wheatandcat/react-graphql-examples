@@ -1,15 +1,21 @@
 import React, { Component } from "react"
 import { Navigation, ScreenVisibilityListener } from "react-native-navigation"
 import { ApolloProvider } from "react-apollo"
+import Auth from "./Auth"
+import Provider from "./Provider"
 import MyPage from "../components/pages/MyPage/Connected"
 import SignIn from "../components/pages/SignIn/Page"
+
+const auth = new Auth()
 
 const withProvider = (Component, client) => {
   return class extends Component {
     render() {
       return (
         <ApolloProvider client={client}>
-          <Component {...this.props} />
+          <Provider auth={auth}>
+            <Component {...this.props} />
+          </Provider>
         </ApolloProvider>
       )
     }

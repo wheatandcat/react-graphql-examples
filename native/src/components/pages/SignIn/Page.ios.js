@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 import React, { Component } from "react"
 import {
   AppRegistry,
@@ -11,19 +6,75 @@ import {
   View,
   TouchableOpacity,
 } from "react-native"
-
+import firebase from "react-native-firebase"
 import { GoogleSignin, GoogleSigninButton } from "react-native-google-signin"
+import { Consumer } from "../../../containers/Provider"
 
-export default class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      user: null,
-    }
+export default class extends Component {
+  render() {
+    return (
+      <Consumer>
+        {({ auth }) => <Connected {...this.props} auth={auth} />}
+      </Consumer>
+    )
+  }
+}
+
+class Connected extends Component {
+  state = {
+    user: null,
   }
 
   componentDidMount() {
-    this._setupGoogleSignin()
+    this.setupGoogleSignin()
+  }
+
+  setupGoogleSignin = async () => {
+    try {
+      await GoogleSignin.hasPlayServices({ autoResolve: true })
+      await GoogleSignin.configure({
+        iosClientId:
+          "222855909542-hlvg250s8i41b77pd59ig58cppuvhc4g.apps.googleusercontent.com",
+        webClientId:
+          "222855909542-i5c3bbas2mfdepjs6jgcnsjsc3kqqfl8.apps.googleusercontent.com",
+        offlineAccess: false,
+      })
+
+      const user = await GoogleSignin.currentUserAsync()
+      this.setState({ user })
+
+      this.setAuth()
+    } catch (err) {
+      console.log("Google signin error", err.code, err.message)
+    }
+  }
+
+  signIn = async () => {
+    const data = await GoogleSignin.signIn()
+    this.setState({ user: data })
+
+    this.setAuth()
+  }
+
+  signOut = async () => {
+    await GoogleSignin.revokeAccess()
+    await GoogleSignin.signOut()
+    this.setState({ user: null })
+  }
+
+  setAuth = async () => {
+    const data = await GoogleSignin.signIn()
+
+    const credential = firebase.auth.GoogleAuthProvider.credential(
+      data.idToken,
+      data.accessToken
+    )
+
+    const currentUser = await firebase
+      .auth()
+      .signInAndRetrieveDataWithCredential(credential)
+
+    this.props.auth.setSession()
   }
 
   render() {
@@ -34,7 +85,7 @@ export default class App extends Component {
             style={{ width: 212, height: 48 }}
             size={GoogleSigninButton.Size.Standard}
             color={GoogleSigninButton.Color.Auto}
-            onPress={this._signIn.bind(this)}
+            onPress={this.signIn.bind(this)}
           />
         </View>
       )
@@ -48,11 +99,7 @@ export default class App extends Component {
           </Text>
           <Text>Your email is: {this.state.user.email}</Text>
 
-          <TouchableOpacity
-            onPress={() => {
-              this._signOut()
-            }}
-          >
+          <TouchableOpacity onPress={this.signOut}>
             <View style={{ marginTop: 50 }}>
               <Text>Log out</Text>
             </View>
@@ -60,46 +107,6 @@ export default class App extends Component {
         </View>
       )
     }
-  }
-
-  async _setupGoogleSignin() {
-    try {
-      await GoogleSignin.hasPlayServices({ autoResolve: true })
-      await GoogleSignin.configure({
-        iosClientId:
-          "222855909542-hlvg250s8i41b77pd59ig58cppuvhc4g.apps.googleusercontent.com",
-        webClientId:
-          "222855909542-i5c3bbas2mfdepjs6jgcnsjsc3kqqfl8.apps.googleusercontent.com",
-        offlineAccess: false,
-      })
-
-      const user = await GoogleSignin.currentUserAsync()
-      console.log(user)
-      this.setState({ user })
-    } catch (err) {
-      console.log("Google signin error", err.code, err.message)
-    }
-  }
-
-  _signIn() {
-    GoogleSignin.signIn()
-      .then(user => {
-        console.log(user)
-        this.setState({ user: user })
-      })
-      .catch(err => {
-        console.log("WRONG SIGNIN", err)
-      })
-      .done()
-  }
-
-  _signOut() {
-    GoogleSignin.revokeAccess()
-      .then(() => GoogleSignin.signOut())
-      .then(() => {
-        this.setState({ user: null })
-      })
-      .done()
   }
 }
 
