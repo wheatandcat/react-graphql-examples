@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
 } from "react-native"
+import { Navigation } from "react-native-navigation"
 import firebase from "react-native-firebase"
 import { GoogleSignin, GoogleSigninButton } from "react-native-google-signin"
 import { Consumer } from "../../../containers/Provider"
@@ -21,10 +22,6 @@ export default class extends Component {
 }
 
 class Connected extends Component {
-  state = {
-    user: null,
-  }
-
   componentDidMount() {
     this.setupGoogleSignin()
   }
@@ -39,32 +36,29 @@ class Connected extends Component {
           "222855909542-i5c3bbas2mfdepjs6jgcnsjsc3kqqfl8.apps.googleusercontent.com",
         offlineAccess: false,
       })
-
-      const user = await GoogleSignin.currentUserAsync()
-      this.setState({ user })
-
-      this.setAuth()
     } catch (err) {
       console.log("Google signin error", err.code, err.message)
     }
   }
 
-  signIn = async () => {
-    const data = await GoogleSignin.signIn()
-    this.setState({ user: data })
-
-    this.setAuth()
+  signIn() {
+    GoogleSignin.signIn()
+      .then(async data => {
+        await this.setAuth(data)
+        Navigation.dismissModal()
+      })
+      .catch(err => {
+        console.log("WRONG SIGNIN", err)
+      })
+      .done()
   }
 
   signOut = async () => {
     await GoogleSignin.revokeAccess()
     await GoogleSignin.signOut()
-    this.setState({ user: null })
   }
 
-  setAuth = async () => {
-    const data = await GoogleSignin.signIn()
-
+  setAuth = async data => {
     const credential = firebase.auth.GoogleAuthProvider.credential(
       data.idToken,
       data.accessToken
@@ -74,39 +68,20 @@ class Connected extends Component {
       .auth()
       .signInAndRetrieveDataWithCredential(credential)
 
-    this.props.auth.setSession()
+    await this.props.auth.setSession()
   }
 
   render() {
-    if (!this.state.user) {
-      return (
-        <View style={styles.container}>
-          <GoogleSigninButton
-            style={{ width: 212, height: 48 }}
-            size={GoogleSigninButton.Size.Standard}
-            color={GoogleSigninButton.Color.Auto}
-            onPress={this.signIn.bind(this)}
-          />
-        </View>
-      )
-    }
-
-    if (this.state.user) {
-      return (
-        <View style={styles.container}>
-          <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 20 }}>
-            Welcome {this.state.user.name}
-          </Text>
-          <Text>Your email is: {this.state.user.email}</Text>
-
-          <TouchableOpacity onPress={this.signOut}>
-            <View style={{ marginTop: 50 }}>
-              <Text>Log out</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      )
-    }
+    return (
+      <View style={styles.container}>
+        <GoogleSigninButton
+          style={{ width: 212, height: 48 }}
+          size={GoogleSigninButton.Size.Standard}
+          color={GoogleSigninButton.Color.Auto}
+          onPress={() => this.signIn()}
+        />
+      </View>
+    )
   }
 }
 

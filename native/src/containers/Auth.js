@@ -3,12 +3,15 @@ import { AsyncStorage } from "react-native"
 import moment from "moment"
 
 export default class Auth {
-  signOut = () => {
-    firebase.auth().signOut()
+  signOut = async () => {
+    await AsyncStorage.clear()
+    await firebase.auth().signOut()
   }
 
-  signedIn = () => {
-    return !!AsyncStorage.getItem("id_token")
+  signedIn = async () => {
+    const idToken = await AsyncStorage.getItem("id_token")
+
+    return !!idToken
   }
 
   setSession = async () => {

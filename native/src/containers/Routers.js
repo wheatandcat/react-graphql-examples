@@ -3,8 +3,9 @@ import { Navigation, ScreenVisibilityListener } from "react-native-navigation"
 import { ApolloProvider } from "react-apollo"
 import Auth from "./Auth"
 import Provider from "./Provider"
-import MyPage from "../components/pages/MyPage/Connected"
+import Users from "../components/pages/Users/Connected"
 import SignIn from "../components/pages/SignIn/Page"
+import Profile from "../components/pages/Profile/Connected"
 
 const auth = new Auth()
 
@@ -23,13 +24,13 @@ const withProvider = (Component, client) => {
 }
 
 export function registerScreens(client) {
-  Navigation.registerComponent("tampatsu.MyPage", () =>
-    withProvider(MyPage, client)
+  Navigation.registerComponent("native.Users", () =>
+    withProvider(Users, client)
   )
-  Navigation.registerComponent("tampatsu.Setting", () =>
-    withProvider(MyPage, client)
+  Navigation.registerComponent("native.Profile", () =>
+    withProvider(Profile, client)
   )
-  Navigation.registerComponent("tampatsu.SignIn", () =>
+  Navigation.registerComponent("native.SignIn", () =>
     withProvider(SignIn, client)
   )
 }

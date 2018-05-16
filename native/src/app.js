@@ -9,7 +9,7 @@ import { setContext } from "apollo-link-context"
 import { createHttpLink } from "apollo-link-http"
 import { InMemoryCache } from "apollo-cache-inmemory"
 
-const host = "https://us-central1-example-202505.cloudfunctions.net/app/graphql"
+const host = "https://us-central1-example-202505.cloudfunctions.net"
 
 const httpLink = createHttpLink({
   uri: `${host}/app/graphql`,
@@ -17,6 +17,8 @@ const httpLink = createHttpLink({
 
 const authLink = setContext(async (_, { headers }) => {
   const token = await AsyncStorage.getItem("id_token")
+
+  console.log(token)
 
   if (!token) {
     return {
@@ -43,16 +45,16 @@ registerScreenVisibilityListener()
 
 const tabs = [
   {
-    label: "xxxxx",
-    screen: "tampatsu.SignIn",
+    label: "users",
+    screen: "native.Users",
     icon: require("../img/list.png"),
-    title: "xxxxx",
+    title: "users",
   },
   {
-    label: "xxxxx",
-    screen: "tampatsu.MyPage",
-    icon: require("../img/swap.png"),
-    title: "xxxxx",
+    label: "profile",
+    screen: "native.Profile",
+    icon: require("../img/user.png"),
+    title: "profile",
   },
 ]
 
@@ -77,11 +79,4 @@ Navigation.startTabBasedApp({
     statusBarColor: "#002b4c",
     tabFontFamily: "BioRhyme-Bold",
   },
-  /*
-  drawer: {
-    left: {
-      screen: "example.Types.Drawer"
-    }
-  }
-  */
 })

@@ -53,22 +53,21 @@ app.use(
   "/graphql",
   cors(),
   graphqlHTTP(async (req, res) => {
-    //if (process.env.NODE_ENV !== "production") {
+    if (process.env.NODE_ENV !== "production") {
+      return {
+        schema: schema,
+        pretty: true,
+      }
+    }
+
+    const idToken = req.headers.authorization.replace("Bearer ", "")
+
+    const decodedToken = await admin.auth().verifyIdToken(idToken)
+
     return {
       schema: schema,
       pretty: true,
     }
-    //}
-    /*
-    const idToken = req.headers.authorization.replace("Bearer ", "");
-
-    const decodedToken = await admin.auth().verifyIdToken(idToken);
-
-    return {
-      schema: schema,
-      pretty: true
-    };
-    */
   })
 )
 

@@ -9,53 +9,12 @@ import {
 import { GoogleSignin, GoogleSigninButton } from "react-native-google-signin"
 
 export default class extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      user: null,
-    }
+  state = {
+    user: null,
   }
 
   componentDidMount() {
     this._setupGoogleSignin()
-  }
-
-  render() {
-    if (!this.state.user) {
-      return (
-        <View style={styles.container}>
-          <GoogleSigninButton
-            style={{ width: 120, height: 44 }}
-            color={GoogleSigninButton.Color.Light}
-            size={GoogleSigninButton.Size.Icon}
-            onPress={() => {
-              this._signIn()
-            }}
-          />
-        </View>
-      )
-    }
-
-    if (this.state.user) {
-      return (
-        <View style={styles.container}>
-          <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 20 }}>
-            Welcome {this.state.user.name}
-          </Text>
-          <Text>Your email is: {this.state.user.email}</Text>
-
-          <TouchableOpacity
-            onPress={() => {
-              this._signOut()
-            }}
-          >
-            <View style={{ marginTop: 50 }}>
-              <Text>Log out</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      )
-    }
   }
 
   async _setupGoogleSignin() {
@@ -94,6 +53,38 @@ export default class extends Component {
         this.setState({ user: null })
       })
       .done()
+  }
+
+  render() {
+    if (!this.state.user) {
+      return (
+        <View style={styles.container}>
+          <GoogleSigninButton
+            style={{ width: 120, height: 44 }}
+            color={GoogleSigninButton.Color.Light}
+            size={GoogleSigninButton.Size.Icon}
+            onPress={this._signIn}
+          />
+        </View>
+      )
+    }
+
+    if (this.state.user) {
+      return (
+        <View style={styles.container}>
+          <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 20 }}>
+            Welcome {this.state.user.name}
+          </Text>
+          <Text>Your email is: {this.state.user.email}</Text>
+
+          <TouchableOpacity onPress={this._signOut}>
+            <View style={{ marginTop: 50 }}>
+              <Text>Log out</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      )
+    }
   }
 }
 

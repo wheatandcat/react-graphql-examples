@@ -49,22 +49,18 @@ const schema = new graphql_1.GraphQLSchema({
 });
 const app = express();
 app.use("/graphql", cors(), graphqlHTTP((req, res) => __awaiter(this, void 0, void 0, function* () {
-    //if (process.env.NODE_ENV !== "production") {
+    if (process.env.NODE_ENV !== "production") {
+        return {
+            schema: schema,
+            pretty: true,
+        };
+    }
+    const idToken = req.headers.authorization.replace("Bearer ", "");
+    const decodedToken = yield admin.auth().verifyIdToken(idToken);
     return {
         schema: schema,
         pretty: true,
     };
-    //}
-    /*
-    const idToken = req.headers.authorization.replace("Bearer ", "");
-
-    const decodedToken = await admin.auth().verifyIdToken(idToken);
-
-    return {
-      schema: schema,
-      pretty: true
-    };
-    */
 })));
 exports.app = functions.https.onRequest(app);
 //# sourceMappingURL=index.js.map
