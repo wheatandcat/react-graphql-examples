@@ -6,18 +6,27 @@ import {
   View,
   TouchableOpacity,
 } from "react-native"
+import { Navigation } from "react-native-navigation"
+import firebase from "react-native-firebase"
 import { GoogleSignin, GoogleSigninButton } from "react-native-google-signin"
+import { Consumer } from "../../../containers/Provider"
 
 export default class extends Component {
-  state = {
-    user: null,
+  render() {
+    return (
+      <Consumer>
+        {({ auth }) => <Connected {...this.props} auth={auth} />}
+      </Consumer>
+    )
   }
+}
 
+class Connected extends Component {
   componentDidMount() {
-    this._setupGoogleSignin()
+    this.setupGoogleSignin()
   }
 
-  async _setupGoogleSignin() {
+  setupGoogleSignin = async () => {
     try {
       await GoogleSignin.hasPlayServices({ autoResolve: true })
       await GoogleSignin.configure({
@@ -25,20 +34,16 @@ export default class extends Component {
           "222855909542-i5c3bbas2mfdepjs6jgcnsjsc3kqqfl8.apps.googleusercontent.com",
         offlineAccess: false,
       })
-
-      const user = await GoogleSignin.currentUserAsync()
-      console.log(user)
-      this.setState({ user })
     } catch (err) {
       console.log("Play services error", err.code, err.message)
     }
   }
 
-  _signIn() {
+  signIn() {
     GoogleSignin.signIn()
-      .then(user => {
-        console.log(user)
-        this.setState({ user: user })
+      .then(async data => {
+        await this.setAuth(data)
+        Navigation.dismissModal()
       })
       .catch(err => {
         console.log("WRONG SIGNIN", err)
@@ -46,45 +51,30 @@ export default class extends Component {
       .done()
   }
 
-  _signOut() {
-    GoogleSignin.revokeAccess()
-      .then(() => GoogleSignin.signOut())
-      .then(() => {
-        this.setState({ user: null })
-      })
-      .done()
+  setAuth = async data => {
+    const credential = firebase.auth.GoogleAuthProvider.credential(
+      data.idToken,
+      data.accessToken
+    )
+
+    const currentUser = await firebase
+      .auth()
+      .signInAndRetrieveDataWithCredential(credential)
+
+    await this.props.auth.setSession()
   }
 
   render() {
-    if (!this.state.user) {
-      return (
-        <View style={styles.container}>
-          <GoogleSigninButton
-            style={{ width: 120, height: 44 }}
-            color={GoogleSigninButton.Color.Light}
-            size={GoogleSigninButton.Size.Icon}
-            onPress={this._signIn}
-          />
-        </View>
-      )
-    }
-
-    if (this.state.user) {
-      return (
-        <View style={styles.container}>
-          <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 20 }}>
-            Welcome {this.state.user.name}
-          </Text>
-          <Text>Your email is: {this.state.user.email}</Text>
-
-          <TouchableOpacity onPress={this._signOut}>
-            <View style={{ marginTop: 50 }}>
-              <Text>Log out</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      )
-    }
+    return (
+      <View style={styles.container}>
+        <GoogleSigninButton
+          style={{ width: 120, height: 44 }}
+          color={GoogleSigninButton.Color.Light}
+          size={GoogleSigninButton.Size.Icon}
+          onPress={() => this.signIn()}
+        />
+      </View>
+    )
   }
 }
 

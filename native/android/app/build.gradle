@@ -138,9 +138,6 @@ android {
 
 dependencies {
     compile project(':react-native-google-signin')
-    compile(project(':react-native-firebase')) {
-        transitive = false
-    }
     implementation(project(':react-native-firebase')) {
         transitive = false
     }
@@ -153,6 +150,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:14.0.0'
     implementation "com.google.android.gms:play-services-base:15.0.0"
     implementation "com.google.firebase:firebase-core:15.0.2"
+    implementation "com.google.firebase:firebase-auth:15.1.0"
 }
 
 // Run this once to be able to run the application with BUCK

@@ -1,4 +1,6 @@
 import { Platform, AsyncStorage } from "react-native"
+import moment from "moment"
+import firebase from "react-native-firebase"
 import { Navigation } from "react-native-navigation"
 import {
   registerScreens,
@@ -15,10 +17,24 @@ const httpLink = createHttpLink({
   uri: `${host}/app/graphql`,
 })
 
-const authLink = setContext(async (_, { headers }) => {
-  const token = await AsyncStorage.getItem("id_token")
+const getIdToken = async () => {
+  let idToken = await AsyncStorage.getItem("id_token")
+  const expiration = await AsyncStorage.getItem("expiration")
 
-  console.log(token)
+  if (Number(expiration) > moment().unix()) {
+    return idToken
+  }
+
+  idToken = await firebase.auth().currentUser.getIdToken(true)
+
+  await AsyncStorage.setItem("id_token", idToken)
+  await AsyncStorage.setItem("expiration", `${moment().unix() + 60 * 60}`)
+
+  return idToken
+}
+
+const authLink = setContext(async (_, { headers }) => {
+  const token = await getIdToken()
 
   if (!token) {
     return {
@@ -39,7 +55,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 })
 
-// screen related book keeping
 registerScreens(client)
 registerScreenVisibilityListener()
 
@@ -58,7 +73,6 @@ const tabs = [
   },
 ]
 
-// this will start our app
 Navigation.startTabBasedApp({
   tabs,
   animationType: Platform.OS === "ios" ? "slide-down" : "fade",
