@@ -1,29 +1,43 @@
 import React, { Component } from "react"
-import { ListView, ScrollView, StyleSheet } from "react-native"
+import {
+  FlatList,
+  ListView,
+  ScrollView,
+  StyleSheet,
+  RefreshControl,
+  ActivityIndicator,
+} from "react-native"
 import { View, ListItem, Colors, ThemeManager } from "react-native-ui-lib"
-import { Icon, Text } from "react-native-elements"
+import InfiniteScrollView from "react-native-infinite-scroll-view"
+import { Icon, Text, Button } from "react-native-elements"
+import PTRView from "react-native-pull-to-refresh"
+
+const ds = new ListView.DataSource({
+  rowHasChanged: (r1, r2) => r1 !== r2,
+  sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
+})
 
 export default class extends Component {
   state = {
     dataSource: [],
+    isLoading: false,
   }
 
   constructor(props) {
     super(props)
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-      sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
-    })
 
-    console.log(this.props)
     this.state = {
-      dataSource: ds.cloneWithRows(this.props.users.items),
+      dataSource: this.props.users.items,
     }
   }
 
   onOrders = () => {}
 
-  renderRow(item, id) {
+  _keyExtractor = (item, index) => {
+    return String(item.key)
+  }
+
+  renderRow({ item }) {
     return (
       <ListItem
         activeBackgroundColor={Colors.dark60}
@@ -49,9 +63,7 @@ export default class extends Component {
           ]}
         >
           <ListItem.Part containerStyle={{ marginBottom: 3 }}>
-            <Text dark10 text70 style={{ flex: 1, marginRight: 10 }}>
-              {item.name}
-            </Text>
+            <Text style={{ flex: 1, marginRight: 10 }}>{item.name}</Text>
           </ListItem.Part>
         </ListItem.Part>
         <ListItem.Part right>
@@ -61,19 +73,51 @@ export default class extends Component {
     )
   }
 
+  _renderRefreshControl() {
+    // Reload all data
+    return (
+      <RefreshControl refreshing={false} onRefresh={this.props.onRefresh} />
+    )
+  }
+
   render() {
     return (
-      <View style={{ paddingVertical: 20, backgroundColor: "#eeeeee" }}>
-        <ScrollView>
-          <ListView
-            dataSource={this.state.dataSource}
-            renderRow={(row, sectionId, rowId) => this.renderRow(row, rowId)}
-          />
-        </ScrollView>
+      <View style={{ flex: 1 }}>
+        <Text h4>List</Text>
+        <PTRView onRefresh={this.props.onRefresh}>
+          <View style={{ paddingVertical: 20, backgroundColor: "#eeeeee" }}>
+            <FlatList
+              data={this.state.dataSource}
+              keyExtractor={this._keyExtractor}
+              renderItem={this.renderRow}
+              onEndReachedThreshold={100}
+              onEndReached={() =>
+                this.setState({ isLoadingMore: true }, () => {
+                  console.log("--onEndReached--")
+                })
+              }
+              ListFooterComponent={
+                this.state.isLoadingMore && (
+                  <View style={{ flex: 1, padding: 10 }}>
+                    <ActivityIndicator size="small" />
+                  </View>
+                )
+              }
+            />
+          </View>
+        </PTRView>
       </View>
     )
   }
 }
+
+/*
+<Button
+  title="BUTTON"
+  onPress={() => this.props.onNext(this.props.users.pageInfo.endCursor)}
+  disabled={!this.props.users.pageInfo.endCursor}
+/>
+*/
 
 const styles = StyleSheet.create({
   border: {

@@ -38,10 +38,12 @@ const schema = new graphql_1.GraphQLSchema({
             },
             users: {
                 type: user_1.schemes,
-                args: { startCursor: { type: graphql_1.GraphQLString } },
+                args: {
+                    startCursor: { type: graphql_1.GraphQLString },
+                    limit: { type: graphql_1.GraphQLInt },
+                },
                 resolve: (_, args) => {
-                    console.log(args);
-                    return user_2.users(datastore, args.startCursor);
+                    return user_2.users(datastore, args.startCursor, args.limit);
                 },
             },
         },

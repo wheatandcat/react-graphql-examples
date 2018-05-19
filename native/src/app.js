@@ -26,6 +26,7 @@ const getIdToken = async () => {
   }
 
   idToken = await firebase.auth().currentUser.getIdToken(true)
+  // console.log(idToken)
 
   await AsyncStorage.setItem("id_token", idToken)
   await AsyncStorage.setItem("expiration", `${moment().unix() + 60 * 60}`)
@@ -94,3 +95,5 @@ Navigation.startTabBasedApp({
     tabFontFamily: "BioRhyme-Bold",
   },
 })
+
+console.disableYellowBox = true

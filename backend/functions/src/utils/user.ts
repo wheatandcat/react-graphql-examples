@@ -1,40 +1,40 @@
-import * as Datastore from "@google-cloud/datastore";
-import { search } from "./paging";
+import * as Datastore from "@google-cloud/datastore"
+import { search } from "./paging"
 
-const kind = "User";
+const kind = "User"
 
 export const user = async (datastore, key) => {
-  const query = await datastore.createQuery(kind).filter("key", "=", key);
-  const result = await datastore.runQuery(query);
+  const query = await datastore.createQuery(kind).filter("key", "=", key)
+  const result = await datastore.runQuery(query)
 
-  return result[0][0] || null;
-};
+  return result[0][0] || null
+}
 
-export const users = async (datastore, startCursor = "") => {
+export const users = async (datastore, startCursor = "", limit = 5) => {
   let q = await datastore
     .createQuery(kind)
     .order("key", {
-      descending: false
+      descending: false,
     })
-    .limit(5);
+    .limit(limit)
 
   if (startCursor) {
-    q = await q.start(startCursor);
+    q = await q.start(startCursor)
   }
 
-  const result = await datastore.runQuery(q);
+  const result = await datastore.runQuery(q)
 
   const pageInfo = await search(
     datastore,
     kind,
     startCursor,
     result[1].endCursor
-  );
+  )
 
   const r = {
     items: result[0],
-    pageInfo
-  };
+    pageInfo,
+  }
 
-  return r;
-};
+  return r
+}
