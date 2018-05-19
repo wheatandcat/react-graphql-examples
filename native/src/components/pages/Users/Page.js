@@ -19,19 +19,8 @@ const ds = new ListView.DataSource({
 
 export default class extends Component {
   state = {
-    dataSource: [],
     isLoading: false,
   }
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      dataSource: this.props.users.items,
-    }
-  }
-
-  onOrders = () => {}
 
   _keyExtractor = (item, index) => {
     return String(item.key)
@@ -73,35 +62,32 @@ export default class extends Component {
     )
   }
 
-  _renderRefreshControl() {
-    // Reload all data
-    return (
-      <RefreshControl refreshing={false} onRefresh={this.props.onRefresh} />
-    )
-  }
-
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Text h4>List</Text>
+        <View style={{ paddingVertical: 20, backgroundColor: "#eeeeee" }}>
+          <Text h4>List</Text>
+        </View>
         <PTRView onRefresh={this.props.onRefresh}>
-          <View style={{ paddingVertical: 20, backgroundColor: "#eeeeee" }}>
+          <View>
             <FlatList
-              data={this.state.dataSource}
-              keyExtractor={this._keyExtractor}
+              data={this.props.items}
               renderItem={this.renderRow}
-              onEndReachedThreshold={100}
-              onEndReached={() =>
-                this.setState({ isLoadingMore: true }, () => {
-                  console.log("--onEndReached--")
-                })
-              }
+              keyExtractor={this._keyExtractor}
               ListFooterComponent={
-                this.state.isLoadingMore && (
-                  <View style={{ flex: 1, padding: 10 }}>
-                    <ActivityIndicator size="small" />
-                  </View>
-                )
+                <Button
+                  title="more"
+                  onPress={() => {
+                    this.props.onLoading()
+                    this.props.onNext(this.props.users.pageInfo.endCursor)
+                  }}
+                  loading={this.props.isLoading}
+                  loadingProps={{
+                    size: "large",
+                    color: "rgba(111, 202, 186, 1)",
+                  }}
+                  disabled={!this.props.users.pageInfo.endCursor}
+                />
               }
             />
           </View>

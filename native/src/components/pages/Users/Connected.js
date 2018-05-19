@@ -38,6 +38,7 @@ class Connected extends Component {
   state = {
     startCursor: "",
     signedIn: false,
+    refresh: false,
   }
 
   constructor(props) {
@@ -49,20 +50,6 @@ class Connected extends Component {
     if (!(event.id === "didAppear" && event.type == "ScreenChangedEvent")) {
       return
     }
-
-    /*
-    const signedIn = await this.props.auth.signedIn()
-
-    if (!signedIn) {
-      this.props.navigator.showModal({
-        screen: "native.SignIn",
-        title: "Sign In",
-      })
-      return
-    }
-
-    this.setState({ signedIn })
-    */
   }
 
   async componentDidMount() {
@@ -88,9 +75,23 @@ class Connected extends Component {
     })
   }
 
-  render() {
-    console.log(this.state.signedIn)
+  onRefresh = () => {
+    this.setState({
+      startCursor: "",
+      refresh: true,
+    })
 
+    return new Promise(resolve => {
+      setTimeout(() => {
+        this.setState({
+          refresh: false,
+        })
+        resolve()
+      }, 2000)
+    })
+  }
+
+  render() {
     if (!this.state.signedIn) {
       return null
     }
@@ -100,6 +101,8 @@ class Connected extends Component {
         {...this.props}
         startCursor={this.state.startCursor}
         onNext={this.onNext}
+        onRefresh={this.onRefresh}
+        refresh={this.state.refresh}
       />
     )
   }
@@ -108,6 +111,8 @@ class Connected extends Component {
 class Plain extends Component {
   state = {
     items: null,
+    endCursor: "",
+    isLoading: false,
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -115,15 +120,26 @@ class Plain extends Component {
       return null
     }
 
-    if (
-      JSON.stringify(nextProps.users.items) === JSON.stringify(prevState.items)
-    ) {
+    if (nextProps.refresh) {
+      return {
+        items: nextProps.users.items,
+        endCursor: nextProps.users.pageInfo.endCursor,
+      }
+    }
+
+    if (nextProps.users.pageInfo.endCursor === prevState.endCursor) {
       return null
     }
 
     return {
       items: [...(prevState.items || []), ...nextProps.users.items],
+      endCursor: nextProps.users.pageInfo.endCursor,
+      isLoading: false,
     }
+  }
+
+  onLoading = () => {
+    this.setState({ isLoading: true })
   }
 
   render() {
@@ -135,13 +151,20 @@ class Plain extends Component {
       )
     }
 
-    return <Page {...this.props} items={this.state.items} />
+    return (
+      <Page
+        {...this.props}
+        items={this.state.items}
+        isLoading={this.state.isLoading}
+        onLoading={this.onLoading}
+      />
+    )
   }
 }
 
 const Users = gql`
   query Users($startCursor: String) {
-    users(startCursor: $startCursor, limit: 15) {
+    users(startCursor: $startCursor, limit: 5) {
       items {
         key
         name
