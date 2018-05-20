@@ -58,3 +58,4 @@ gradle.properties
 google-services.json
 GoogleService-Info.plist
 ios/Pods
+Appfile

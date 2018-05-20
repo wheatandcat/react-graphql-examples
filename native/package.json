@@ -6,7 +6,9 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "xcode": "open ./ios/native.xcworkspace",
-    "android": "cd android && ./gradlew installDebug"
+    "android": "cd android && ./gradlew installDebug",
+    "android:bate": "cd android && ./gradlew assembleRelease",
+    "ios:bate": "cd ios && fastlane beta"
   },
   "dependencies": {
     "apollo-boost": "^0.1.6",
