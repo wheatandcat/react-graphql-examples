@@ -22,6 +22,11 @@ export default class extends Component {
 }
 
 class Connected extends Component {
+  state = {
+    email: "",
+    error: null,
+  }
+
   componentDidMount() {
     this.setupGoogleSignin()
   }
@@ -42,10 +47,16 @@ class Connected extends Component {
   signIn() {
     GoogleSignin.signIn()
       .then(async data => {
+        this.setState({
+          email: data.email,
+        })
         await this.setAuth(data)
         Navigation.dismissModal()
       })
       .catch(err => {
+        this.setState({
+          error: err,
+        })
         console.log("WRONG SIGNIN", err)
       })
       .done()
@@ -67,6 +78,16 @@ class Connected extends Component {
   render() {
     return (
       <View style={styles.container}>
+        {this.state.email ? (
+          <View>
+            <Text>Welcome: {this.state.email}</Text>
+          </View>
+        ) : null}
+        {this.state.error ? (
+          <View>
+            <Text>{JSON.stringify(this.state.error)}</Text>
+          </View>
+        ) : null}
         <GoogleSigninButton
           style={{ width: 120, height: 44 }}
           color={GoogleSigninButton.Color.Light}

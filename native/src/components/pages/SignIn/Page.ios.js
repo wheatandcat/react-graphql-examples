@@ -22,6 +22,10 @@ export default class extends Component {
 }
 
 class Connected extends Component {
+  state = {
+    email: "",
+  }
+
   componentDidMount() {
     this.setupGoogleSignin()
   }
@@ -44,6 +48,9 @@ class Connected extends Component {
   signIn() {
     GoogleSignin.signIn()
       .then(async data => {
+        this.setState({
+          email: data.email,
+        })
         await this.setAuth(data)
         Navigation.dismissModal()
       })
@@ -74,6 +81,12 @@ class Connected extends Component {
   render() {
     return (
       <View style={styles.container}>
+        {this.state.email ? (
+          <View>
+            <Text>Welcome: {this.state.email}</Text>{" "}
+          </View>
+        ) : null}
+
         <GoogleSigninButton
           style={{ width: 212, height: 48 }}
           size={GoogleSigninButton.Size.Standard}

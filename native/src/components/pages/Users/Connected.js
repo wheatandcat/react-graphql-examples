@@ -50,6 +50,12 @@ class Connected extends Component {
     if (!(event.id === "didAppear" && event.type == "ScreenChangedEvent")) {
       return
     }
+
+    const signedIn = await this.props.auth.signedIn()
+    this.setState({
+      startCursor: "",
+      signedIn: signedIn,
+    })
   }
 
   async componentDidMount() {

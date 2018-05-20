@@ -18,7 +18,7 @@ export default class extends Component {
 class Connected extends Component {
   onSignOut = async () => {
     GoogleSignin.revokeAccess()
-    await GoogleSignin.signOut()
+    GoogleSignin.signOut()
     await this.props.auth.signOut()
 
     this.props.navigator.showModal({

@@ -8,6 +8,8 @@
     "xcode": "open ./ios/native.xcworkspace",
     "android": "cd android && ./gradlew installDebug",
     "android:bate": "cd android && ./gradlew assembleRelease",
+    "android:bate:jarsigner":
+      "cd android && jarsigner -verbose -keystore app/android-release.keystore app/build/outputs/apk/release/app-release-unsigned.apk android-release",
     "ios:bate": "cd ios && fastlane beta"
   },
   "dependencies": {
