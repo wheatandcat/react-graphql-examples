@@ -36,7 +36,7 @@ export default class extends Component {
         easing="ease-out-expo"
         duration={1000}
         useNativeDriver
-        onPress={this.onOrders}
+        onPress={() => this.props.onUserDetail(item.key)}
       >
         <ListItem.Part left>
           <View style={{ paddingHorizontal: 15 }}>
@@ -72,7 +72,7 @@ export default class extends Component {
           <View>
             <FlatList
               data={this.props.items}
-              renderItem={this.renderRow}
+              renderItem={this.renderRow.bind(this)}
               keyExtractor={this._keyExtractor}
               ListFooterComponent={
                 <Button
@@ -96,14 +96,6 @@ export default class extends Component {
     )
   }
 }
-
-/*
-<Button
-  title="BUTTON"
-  onPress={() => this.props.onNext(this.props.users.pageInfo.endCursor)}
-  disabled={!this.props.users.pageInfo.endCursor}
-/>
-*/
 
 const styles = StyleSheet.create({
   border: {

@@ -6,9 +6,8 @@
   "author": "wheatandcat",
   "license": "MIT",
   "scripts": {
-    "relay": "relay-compiler --src ./src --schema ./data/schema.graphql",
     "start": "BABEL_ENV=development NODE_ENV=development webpack-dev-server --mode development",
-    "build": "BABEL_ENV=production NODE_ENV=production webpack --mode production"
+    "build": "API_HOST=https://us-central1-example-202505.cloudfunctions.net BABEL_ENV=production NODE_ENV=production webpack --mode production"
   },
   "repository": {
     "type": "git",

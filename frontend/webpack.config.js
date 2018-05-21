@@ -38,4 +38,14 @@ module.exports = {
     modules: ["./src", "./node_modules"],
     extensions: [".js", ".jsx"],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": '"' + process.env.NODE_ENV + '"',
+      "process.env.API_HOST":
+        '"' +
+        (process.env.API_HOST ||
+          "http://localhost:5000/example-202505/us-central1") +
+        '"',
+    }),
+  ],
 }

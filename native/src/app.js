@@ -85,8 +85,8 @@ Navigation.startTabBasedApp({
   },
   appStyle: {
     tabBarBackgroundColor: "#003a66",
-    navBarButtonColor: "#ffffff",
-    tabBarButtonColor: "#ffffff",
+    navBarButtonColor: "#000000",
+    tabBarButtonColor: "#000000",
     navBarTextColor: "#111111",
     tabBarSelectedButtonColor: "#ff505c",
     navigationBarColor: "#003a66",

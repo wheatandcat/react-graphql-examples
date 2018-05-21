@@ -97,6 +97,16 @@ class Connected extends Component {
     })
   }
 
+  onUserDetail = userId => {
+    this.props.navigator.push({
+      screen: "native.Users.User",
+      title: "A",
+      passProps: {
+        userId: userId,
+      },
+    })
+  }
+
   render() {
     if (!this.state.signedIn) {
       return null
@@ -108,6 +118,7 @@ class Connected extends Component {
         startCursor={this.state.startCursor}
         onNext={this.onNext}
         onRefresh={this.onRefresh}
+        onUserDetail={this.onUserDetail}
         refresh={this.state.refresh}
       />
     )
