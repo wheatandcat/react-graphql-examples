@@ -22,6 +22,27 @@ react-native run-android
 npm run ios:bate
 ```
 
+### ios appetize.io upload
+
+#### build
+
+```
+npm run xcode
+
+// exec build
+// end
+
+ls   ~/Library/Developer/Xcode/DerivedData/<project-name>/Build/Products/Release-iphonesimulator/<project-name>.app
+```
+
+Create <project-name>.app.zip from <project-name>.app
+
+#### upload
+
+Upload <project-name>.app.zip
+
+https://appetize.io/upload
+
 ## build android
 
 ```
@@ -34,4 +55,17 @@ open android/app/build/outputs/apk/release/
 
 ```
 keytool -list -v -keystore android/app/android-release.keystore
+```
+
+### android appetize.io upload
+
+#### get APITOKEN
+
+https://appetize.io/docs#request-api-token
+
+#### upload
+
+```
+curl https://APITOKEN@api.appetize.io/v1/apps \
+  -F "file=@app-release-unsigned.apk" -F "platform=android"
 ```

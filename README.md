@@ -8,11 +8,11 @@
 
 ### android (appetize.io)
 
-* https://appetize.io/app/b9rpy0h3r7nc0zbca36kvd68a8
+* https://appetize.io/app/cadx8a22mw0tcxbj952m3tfv0g
 
 ### ios (appetize.io)
 
-* https://appetize.io/app/fvxdhx60g38jmcvepk43v8yur8
+* https://appetize.io/app/6n99qu72hq58uabhqbdmue64qg
 
 ### init
 
