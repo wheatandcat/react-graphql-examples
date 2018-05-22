@@ -9,6 +9,8 @@
 
 examples
 
+![image](./doc/demo.gif)
+
 ### DEMO
 
 ### web
