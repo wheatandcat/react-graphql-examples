@@ -7,8 +7,6 @@ brew install node
 
 # android
 
-## local android
-
 ### setup
 
 ```
@@ -22,7 +20,7 @@ android.useDeprecatedNdk=true
 android.enableAapt2=false
 ```
 
-### run
+## local android
 
 ```
 react-native run-android
@@ -76,6 +74,13 @@ curl https://APITOKEN@api.appetize.io/v1/apps \
 ```
 
 # ios
+
+## setup
+
+```
+cd ios
+pod install
+```
 
 ## local ios
 
