@@ -8,7 +8,6 @@ import {
   ActivityIndicator,
 } from "react-native"
 import { View, ListItem, Colors, ThemeManager } from "react-native-ui-lib"
-import InfiniteScrollView from "react-native-infinite-scroll-view"
 import { Icon, Text, Button } from "react-native-elements"
 import PTRView from "react-native-pull-to-refresh"
 
