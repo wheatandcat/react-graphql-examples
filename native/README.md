@@ -10,10 +10,10 @@ brew install node
 ### setup
 
 ```
-vi  native/android/gradle.properties
+vi ./android/gradle.properties
 ```
 
-↓ 　 native/android/gradle.properties save
+↓ 　 android/gradle.properties save
 
 ```
 android.useDeprecatedNdk=true
